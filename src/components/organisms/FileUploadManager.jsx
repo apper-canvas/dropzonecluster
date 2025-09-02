@@ -96,7 +96,7 @@ const FileUploadManager = () => {
     ))
     
     try {
-      const result = await fileService.uploadFile(file, (progress, speed) => {
+const result = await fileService.uploadFile(file, (progress, speed) => {
         setFiles(prev => prev.map(f => 
           f.id === file.id 
             ? { ...f, progress, uploadSpeed: speed }
@@ -104,9 +104,19 @@ const FileUploadManager = () => {
         ))
       })
       
+      // Update local state with database record
       setFiles(prev => prev.map(f => 
         f.id === file.id 
-          ? { ...f, status: "completed", progress: 100, uploadSpeed: 0 }
+          ? { 
+              ...f, 
+              id: result.id, // Use database ID
+              status: "completed", 
+              progress: 100, 
+              uploadSpeed: 0,
+              originalName: result.originalName,
+              url: result.url,
+              checksum: result.checksum
+            }
           : f
       ))
       

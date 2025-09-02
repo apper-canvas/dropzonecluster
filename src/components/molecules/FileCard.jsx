@@ -66,7 +66,7 @@ const FileCard = ({ file, onRemove, onRetry }) => {
           <div className="flex items-start justify-between mb-2">
             <div className="flex-1 min-w-0">
               <h4 className="text-sm font-medium text-white truncate">
-                {file.name}
+{file.originalName || file.name}
               </h4>
               <div className="flex items-center gap-2 text-xs text-gray-400 mt-1">
                 <span>{formatFileSize(file.size)}</span>

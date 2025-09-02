@@ -1,11 +1,39 @@
-import React from "react"
-import { motion } from "framer-motion"
-import FileUploadManager from "@/components/organisms/FileUploadManager"
-import ApperIcon from "@/components/ApperIcon"
+import React, { useContext } from "react";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthContext } from "../../App";
+import ApperIcon from "@/components/ApperIcon";
+import FileUploadManager from "@/components/organisms/FileUploadManager";
+import DropZone from "@/components/molecules/DropZone";
+import Button from "@/components/atoms/Button";
+
+const LogoutButton = () => {
+  const { logout } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
+  
+  return (
+    <div className="flex items-center gap-3">
+      {user && (
+        <span className="text-sm text-gray-400">
+          Welcome, {user.firstName || user.emailAddress}
+        </span>
+      )}
+      <Button 
+        variant="ghost" 
+        size="sm"
+        onClick={logout}
+        className="flex items-center gap-2"
+      >
+        <ApperIcon name="LogOut" size={16} />
+        Logout
+      </Button>
+    </div>
+  );
+};
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-background/50">
       {/* Header */}
       <motion.header
         className="border-b border-white/10 bg-background/80 backdrop-blur-lg sticky top-0 z-50"
@@ -71,7 +99,12 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <FileUploadManager />
+          <div className="relative">
+            <div className="absolute top-4 right-4 z-10">
+              <LogoutButton />
+            </div>
+            <FileUploadManager />
+          </div>
         </motion.div>
       </main>
       
@@ -108,7 +141,7 @@ const HomePage = () => {
         </div>
       </motion.footer>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
