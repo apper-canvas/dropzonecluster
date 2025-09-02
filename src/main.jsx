@@ -28,7 +28,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         borderRadius: "12px",
         color: "#F1F5F9"
       }}
-      style={{ zIndex: 9999 }}
+style={{ zIndex: 9999 }}
     />
-</BrowserRouter>
+    </BrowserRouter>
+  </Provider>
 );
