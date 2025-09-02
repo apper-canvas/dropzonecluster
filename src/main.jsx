@@ -30,5 +30,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
       style={{ zIndex: 9999 }}
     />
-  </BrowserRouter>
-)
+</BrowserRouter>
+);
